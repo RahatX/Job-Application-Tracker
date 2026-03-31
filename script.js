@@ -83,4 +83,62 @@ const jobs = [
   }
 ];
 
-console.log(jobs);
+const jobListEl = document.getElementById("jobList");
+
+function getStatusBadge(job) {
+  return `
+    <span class="inline-flex rounded-md bg-gray-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+      Not Applied
+    </span>
+  `;
+}
+
+function createCard(job) {
+  return `
+    <article class="rounded-xl bg-white p-5 shadow-card">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-[20px] font-extrabold text-title">${job.companyName}</h3>
+          <p class="mt-1 text-sm font-medium text-body">${job.position}</p>
+        </div>
+
+        <button data-action="delete" data-id="${job.id}" class="rounded-md p-2 text-gray-400 hover:text-red-500">
+          ✕
+        </button>
+      </div>
+
+      <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-body">
+        <span>${job.location}</span>
+        <span>•</span>
+        <span>${job.type}</span>
+        <span>•</span>
+        <span>${job.salary}</span>
+      </div>
+
+      <div class="mt-4">
+        ${getStatusBadge(job)}
+      </div>
+
+      <p class="mt-4 text-sm leading-7 text-body">${job.description}</p>
+
+      <div class="mt-5 flex flex-wrap items-center gap-3">
+        <button data-action="interview" data-id="${job.id}" class="rounded-md border border-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-500 hover:bg-emerald-50">
+          Interview
+        </button>
+
+        <button data-action="rejected" data-id="${job.id}" class="rounded-md border border-red-500 px-4 py-2 text-sm font-semibold text-red-500 hover:bg-red-50">
+          Rejected
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function renderJobs() {
+  jobListEl.innerHTML = jobs.map(createCard).join("");
+}
+
+renderJobs();
+
+
+
