@@ -138,7 +138,7 @@ function getStatusBadge(job) {
     return `<span class="inline-flex rounded-md bg-red-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-600">Rejected</span>`;
   }
 
-  return `<span class="inline-flex rounded-md bg-gray-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">Not Applied</span>`;
+  return `<span class="inline-flex rounded-md bg-blue-50 px-4 py-2 text-xs font-bold uppercase text-blue-900">Not Applied</span>`;
 }
 
 function createCard(job) {
