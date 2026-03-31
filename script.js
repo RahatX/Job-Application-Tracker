@@ -1,6 +1,3 @@
-const emptyStateEl = document.getElementById("emptyState");
-
-
 const jobs = [
   {
     id: 1,
@@ -90,6 +87,7 @@ const totalCountEl = document.getElementById("totalCount");
 const interviewCountEl = document.getElementById("interviewCount");
 const rejectedCountEl = document.getElementById("rejectedCount");
 const tabJobCountEl = document.getElementById("tabJobCount");
+const emptyStateEl = document.getElementById("emptyState");
 const jobListEl = document.getElementById("jobList");
 const tabButtons = document.querySelectorAll(".tab-btn");
 
@@ -112,9 +110,13 @@ function updateDashboard() {
   interviewCountEl.textContent = counts.interview;
   rejectedCountEl.textContent = counts.rejected;
 
-  if (activeTab === "all") tabJobCountEl.textContent = counts.total;
-  if (activeTab === "interview") tabJobCountEl.textContent = counts.interview;
-  if (activeTab === "rejected") tabJobCountEl.textContent = counts.rejected;
+  if (activeTab === "all") {
+    tabJobCountEl.textContent = counts.total;
+  } else if (activeTab === "interview") {
+    tabJobCountEl.textContent = counts.interview;
+  } else {
+    tabJobCountEl.textContent = counts.rejected;
+  }
 }
 
 function updateTabs() {
@@ -122,33 +124,21 @@ function updateTabs() {
     if (button.dataset.tab === activeTab) {
       button.className = "tab-btn rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white";
     } else {
-      button.className = "tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600";
+      button.className = "tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-300";
     }
   });
 }
 
 function getStatusBadge(job) {
   if (job.status === "interview") {
-    return `
-      <span class="inline-flex rounded-md bg-green-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-green-600">
-        Interview
-      </span>
-    `;
+    return `<span class="inline-flex rounded-md bg-green-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-green-600">Interview</span>`;
   }
 
   if (job.status === "rejected") {
-    return `
-      <span class="inline-flex rounded-md bg-red-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-600">
-        Rejected
-      </span>
-    `;
+    return `<span class="inline-flex rounded-md bg-red-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-600">Rejected</span>`;
   }
 
-  return `
-    <span class="inline-flex rounded-md bg-gray-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-      Not Applied
-    </span>
-  `;
+  return `<span class="inline-flex rounded-md bg-gray-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">Not Applied</span>`;
 }
 
 function createCard(job) {
@@ -210,13 +200,12 @@ function renderJobs() {
 
 document.addEventListener("click", function (event) {
   const tabBtn = event.target.closest("[data-tab]");
-  if (!tabBtn) return;
+  if (tabBtn) {
+    activeTab = tabBtn.dataset.tab;
+    renderJobs();
+    return;
+  }
 
-  activeTab = tabBtn.dataset.tab;
-  renderJobs();
-});
-
-document.addEventListener("click", function (event) {
   const actionBtn = event.target.closest("[data-action]");
   if (!actionBtn) return;
 
@@ -244,9 +233,5 @@ document.addEventListener("click", function (event) {
     renderJobs();
   }
 });
-
-
-
-
 
 renderJobs();
