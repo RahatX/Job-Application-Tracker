@@ -1,3 +1,6 @@
+const emptyStateEl = document.getElementById("emptyState");
+
+
 const jobs = [
   {
     id: 1,
@@ -192,7 +195,16 @@ function createCard(job) {
 function renderJobs() {
   updateDashboard();
   updateTabs();
+
   const visibleJobs = getVisibleJobs();
+
+  if (visibleJobs.length === 0) {
+    jobListEl.innerHTML = "";
+    emptyStateEl.classList.remove("hidden");
+    return;
+  }
+
+  emptyStateEl.classList.add("hidden");
   jobListEl.innerHTML = visibleJobs.map(createCard).join("");
 }
 
