@@ -28,7 +28,29 @@
 </head>
 <body class="bg-page">
   <main class="mx-auto max-w-[980px] px-4 py-8">
-  </main>
+  <header class="text-center">
+    <h1 class="text-[28px] font-extrabold text-title">
+      Job Application Tracker
+    </h1>
+  </header>
+
+  <section class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="rounded-xl bg-white p-5 shadow-card">
+      <p class="text-xs font-medium text-body">Total</p>
+      <h2 id="totalCount" class="mt-2 text-[28px] font-extrabold text-blue-600">8</h2>
+    </div>
+
+    <div class="rounded-xl bg-white p-5 shadow-card">
+      <p class="text-xs font-medium text-body">Interview</p>
+      <h2 id="interviewCount" class="mt-2 text-[28px] font-extrabold text-emerald-500">0</h2>
+    </div>
+
+    <div class="rounded-xl bg-white p-5 shadow-card">
+      <p class="text-xs font-medium text-body">Rejected</p>
+      <h2 id="rejectedCount" class="mt-2 text-[28px] font-extrabold text-red-500">0</h2>
+    </div>
+  </section>
+</main>
 
   <script src="./script.js"></script>
 </body>
