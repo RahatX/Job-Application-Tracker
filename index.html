@@ -50,6 +50,33 @@
       <h2 id="rejectedCount" class="mt-2 text-[28px] font-extrabold text-red-500">0</h2>
     </div>
   </section>
+
+  <section class="mt-8">
+  <div class="flex items-center justify-between">
+    <h2 class="text-[20px] font-extrabold text-title">Available Jobs</h2>
+    <p class="text-sm font-medium text-body"><span id="tabJobCount">8</span> jobs</p>
+  </div>
+
+  <div class="mt-4 flex items-center gap-2">
+    <button data-tab="all" class="tab-btn rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
+      All
+    </button>
+    <button data-tab="interview" class="tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600">
+      Interview
+    </button>
+    <button data-tab="rejected" class="tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600">
+      Rejected
+    </button>
+  </div>
+
+  <div id="emptyState" class="mt-6 hidden rounded-xl bg-white px-6 py-16 text-center shadow-card">
+    <img src="./jobs.png" alt="No jobs icon" class="mx-auto h-16 w-16 object-contain" />
+    <h3 class="mt-4 text-[24px] font-extrabold text-title">No jobs available</h3>
+    <p class="mt-2 text-sm text-body">Check back soon for new job opportunities</p>
+  </div>
+
+  <div id="jobList" class="mt-6 space-y-4"></div>
+</section>
 </main>
 
   <script src="./script.js"></script>
