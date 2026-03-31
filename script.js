@@ -1,5 +1,3 @@
-console.log("Job Application Tracker");
-
 const jobs = [
   {
     id: 1,
@@ -83,7 +81,27 @@ const jobs = [
   }
 ];
 
+const totalCountEl = document.getElementById("totalCount");
+const interviewCountEl = document.getElementById("interviewCount");
+const rejectedCountEl = document.getElementById("rejectedCount");
+const tabJobCountEl = document.getElementById("tabJobCount");
 const jobListEl = document.getElementById("jobList");
+
+function getCounts() {
+  return {
+    total: jobs.length,
+    interview: jobs.filter(job => job.status === "interview").length,
+    rejected: jobs.filter(job => job.status === "rejected").length
+  };
+}
+
+function updateDashboard() {
+  const counts = getCounts();
+  totalCountEl.textContent = counts.total;
+  interviewCountEl.textContent = counts.interview;
+  rejectedCountEl.textContent = counts.rejected;
+  tabJobCountEl.textContent = counts.total;
+}
 
 function getStatusBadge(job) {
   return `
@@ -135,10 +153,8 @@ function createCard(job) {
 }
 
 function renderJobs() {
+  updateDashboard();
   jobListEl.innerHTML = jobs.map(createCard).join("");
 }
 
 renderJobs();
-
-
-
