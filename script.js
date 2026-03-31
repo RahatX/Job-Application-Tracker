@@ -125,6 +125,22 @@ function updateTabs() {
 }
 
 function getStatusBadge(job) {
+  if (job.status === "interview") {
+    return `
+      <span class="inline-flex rounded-md bg-green-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-green-600">
+        Interview
+      </span>
+    `;
+  }
+
+  if (job.status === "rejected") {
+    return `
+      <span class="inline-flex rounded-md bg-red-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-600">
+        Rejected
+      </span>
+    `;
+  }
+
   return `
     <span class="inline-flex rounded-md bg-gray-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
       Not Applied
@@ -186,6 +202,28 @@ document.addEventListener("click", function (event) {
 
   activeTab = tabBtn.dataset.tab;
   renderJobs();
+});
+
+document.addEventListener("click", function (event) {
+  const actionBtn = event.target.closest("[data-action]");
+  if (!actionBtn) return;
+
+  const action = actionBtn.dataset.action;
+  const jobId = Number(actionBtn.dataset.id);
+  const job = jobs.find(item => item.id === jobId);
+
+  if (!job) return;
+
+  if (action === "interview") {
+    job.status = job.status === "interview" ? "not_applied" : "interview";
+    renderJobs();
+    return;
+  }
+
+  if (action === "rejected") {
+    job.status = job.status === "rejected" ? "not_applied" : "rejected";
+    renderJobs();
+  }
 });
 
 renderJobs();
