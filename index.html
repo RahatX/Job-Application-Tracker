@@ -11,73 +11,83 @@
         extend: {
           colors: {
             page: "#f3f4f6",
-            title: "#1f2937",
-            body: "#6b7280",
+            title: "#0f172a",
+            body: "#64748b",
             borderSoft: "#e5e7eb",
-            blueTab: "#2563eb",
+            blueTab: "#3b82f6",
             interview: "#10b981",
             rejected: "#ef4444"
           },
           boxShadow: {
-            card: "0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03)"
+            card: "0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 10px rgba(15, 23, 42, 0.03)"
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
           }
         }
       }
     };
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-page">
-  <main class="mx-auto max-w-[980px] px-4 py-8">
-  <header class="text-center">
-    <h1 class="text-[28px] font-extrabold text-title">
-      Job Application Tracker
-    </h1>
-  </header>
+<body class="bg-page font-sans text-title">
+  <main class="mx-auto max-w-[1120px] px-4 py-6 sm:px-6 lg:px-8">
+    <header class="mb-8">
+      <h1 class="text-[28px] font-extrabold leading-none tracking-[-0.02em] text-[#0f3668] sm:text-[30px]">
+        Job Application Tracker
+      </h1>
+    </header>
 
-  <section class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-    <div class="rounded-xl bg-white p-5 shadow-card">
-      <p class="text-xs font-medium text-body">Total</p>
-      <h2 id="totalCount" class="mt-2 text-[28px] font-extrabold text-blue-600">8</h2>
-    </div>
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border border-[#e7ebf0] bg-white px-5 py-4 shadow-card sm:px-6 sm:py-5">
+        <p class="text-[13px] font-semibold text-[#334155]">Total</p>
+        <h2 id="totalCount" class="mt-3 text-[28px] font-extrabold leading-none text-[#0f3668]">8</h2>
+      </div>
 
-    <div class="rounded-xl bg-white p-5 shadow-card">
-      <p class="text-xs font-medium text-body">Interview</p>
-      <h2 id="interviewCount" class="mt-2 text-[28px] font-extrabold text-emerald-500">0</h2>
-    </div>
+      <div class="rounded-2xl border border-[#e7ebf0] bg-white px-5 py-4 shadow-card sm:px-6 sm:py-5">
+        <p class="text-[13px] font-semibold text-[#334155]">Interview</p>
+        <h2 id="interviewCount" class="mt-3 text-[28px] font-extrabold leading-none text-[#10b981]">0</h2>
+      </div>
 
-    <div class="rounded-xl bg-white p-5 shadow-card">
-      <p class="text-xs font-medium text-body">Rejected</p>
-      <h2 id="rejectedCount" class="mt-2 text-[28px] font-extrabold text-red-500">0</h2>
-    </div>
-  </section>
+      <div class="rounded-2xl border border-[#e7ebf0] bg-white px-5 py-4 shadow-card sm:px-6 sm:py-5">
+        <p class="text-[13px] font-semibold text-[#334155]">Rejected</p>
+        <h2 id="rejectedCount" class="mt-3 text-[28px] font-extrabold leading-none text-[#ef4444]">0</h2>
+      </div>
+    </section>
 
-  <section class="mt-8">
-  <div class="flex items-center justify-between">
-    <h2 class="text-[20px] font-extrabold text-title">Available Jobs</h2>
-    <p class="text-sm font-medium text-body"><span id="tabJobCount">8</span> jobs</p>
-  </div>
+    <section class="mt-7 border-t border-[#dde3ea] pt-7">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="text-[20px] font-extrabold tracking-[-0.02em] text-[#0f3668] sm:text-[22px]">
+          Available Jobs
+        </h2>
+        <p class="text-[15px] font-semibold text-[#64748b]">
+          <span id="tabJobCount">8</span> jobs
+        </p>
+      </div>
 
-  <div class="mt-4 flex items-center gap-2">
-    <button data-tab="all" class="tab-btn rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
-      All
-    </button>
-    <button data-tab="interview" class="tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600">
-      Interview
-    </button>
-    <button data-tab="rejected" class="tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600">
-      Rejected
-    </button>
-  </div>
+      <div class="mt-5 flex flex-wrap items-center gap-2">
+        <button data-tab="all" class="tab-btn rounded-md px-5 py-2 text-[13px] font-semibold transition">
+          All
+        </button>
+        <button data-tab="interview" class="tab-btn rounded-md px-5 py-2 text-[13px] font-semibold transition">
+          Interview
+        </button>
+        <button data-tab="rejected" class="tab-btn rounded-md px-5 py-2 text-[13px] font-semibold transition">
+          Rejected
+        </button>
+      </div>
 
-  <div id="emptyState" class="mt-6 hidden rounded-xl bg-white px-6 py-16 text-center shadow-card">
-    <img src="./jobs.png" alt="No jobs icon" class="mx-auto h-16 w-16 object-contain" />
-    <h3 class="mt-4 text-[24px] font-extrabold text-title">No jobs available</h3>
-    <p class="mt-2 text-sm text-body">Check back soon for new job opportunities</p>
-  </div>
+      <div id="emptyState" class="mt-6 hidden rounded-2xl border border-[#e7ebf0] bg-white px-6 py-16 text-center shadow-card">
+        <img src="./jobs.png" alt="No jobs icon" class="mx-auto h-[72px] w-[72px] object-contain" />
+        <h3 class="mt-4 text-[24px] font-extrabold tracking-[-0.02em] text-title">No jobs available</h3>
+        <p class="mt-2 text-sm text-body">Check back soon for new job opportunities</p>
+      </div>
 
-  <div id="jobList" class="mt-6 space-y-4"></div>
-</section>
-</main>
+      <div id="jobList" class="mt-6 space-y-4"></div>
+    </section>
+  </main>
 
   <script src="./script.js"></script>
 </body>
