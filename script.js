@@ -81,11 +81,14 @@ const jobs = [
   }
 ];
 
+let activeTab = "all";
+
 const totalCountEl = document.getElementById("totalCount");
 const interviewCountEl = document.getElementById("interviewCount");
 const rejectedCountEl = document.getElementById("rejectedCount");
 const tabJobCountEl = document.getElementById("tabJobCount");
 const jobListEl = document.getElementById("jobList");
+const tabButtons = document.querySelectorAll(".tab-btn");
 
 function getCounts() {
   return {
@@ -95,12 +98,30 @@ function getCounts() {
   };
 }
 
+function getVisibleJobs() {
+  if (activeTab === "all") return jobs;
+  return jobs.filter(job => job.status === activeTab);
+}
+
 function updateDashboard() {
   const counts = getCounts();
   totalCountEl.textContent = counts.total;
   interviewCountEl.textContent = counts.interview;
   rejectedCountEl.textContent = counts.rejected;
-  tabJobCountEl.textContent = counts.total;
+
+  if (activeTab === "all") tabJobCountEl.textContent = counts.total;
+  if (activeTab === "interview") tabJobCountEl.textContent = counts.interview;
+  if (activeTab === "rejected") tabJobCountEl.textContent = counts.rejected;
+}
+
+function updateTabs() {
+  tabButtons.forEach(button => {
+    if (button.dataset.tab === activeTab) {
+      button.className = "tab-btn rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white";
+    } else {
+      button.className = "tab-btn rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-600";
+    }
+  });
 }
 
 function getStatusBadge(job) {
@@ -154,7 +175,17 @@ function createCard(job) {
 
 function renderJobs() {
   updateDashboard();
-  jobListEl.innerHTML = jobs.map(createCard).join("");
+  updateTabs();
+  const visibleJobs = getVisibleJobs();
+  jobListEl.innerHTML = visibleJobs.map(createCard).join("");
 }
+
+document.addEventListener("click", function (event) {
+  const tabBtn = event.target.closest("[data-tab]");
+  if (!tabBtn) return;
+
+  activeTab = tabBtn.dataset.tab;
+  renderJobs();
+});
 
 renderJobs();
