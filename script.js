@@ -214,6 +214,13 @@ document.addEventListener("click", function (event) {
 
   if (!job) return;
 
+  if (action === "delete") {
+    const index = jobs.findIndex(item => item.id === jobId);
+    jobs.splice(index, 1);
+    renderJobs();
+    return;
+  }
+
   if (action === "interview") {
     job.status = job.status === "interview" ? "not_applied" : "interview";
     renderJobs();
@@ -225,5 +232,9 @@ document.addEventListener("click", function (event) {
     renderJobs();
   }
 });
+
+
+
+
 
 renderJobs();
